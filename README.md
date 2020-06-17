@@ -29,7 +29,7 @@ You can also **load** and **save** the data at any step in the pipeline.
 
 ## Installation
 
-First install the [Protobuf Compiler() and the corresponding [Protobuf Go Plugin](https://developers.google.com/protocol-buffers/docs/gotutorial)
+First install the [Protobuf Compiler](https://developers.google.com/protocol-buffers/docs/downloads) and the corresponding [Protobuf Go Plugin](https://developers.google.com/protocol-buffers/docs/gotutorial)
 manually or use the following command:
 
     make
