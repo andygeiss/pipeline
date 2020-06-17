@@ -36,6 +36,8 @@ manually or use the following command:
 
 ## Usage
 
+The first time you can create the whole process at once:
+
 ```go
 func main() {
     p := new(pipeline.Pipeline)
@@ -46,14 +48,58 @@ func main() {
     }).
     Save("data/interim/iris.pb").
     Transform(func(in proto.Message) (out proto.Message, err error) {
+        // Extract features ...
+        // Normalize ...
+        // Whatever ...
         return nil, nil
     }).
     Save("data/processed/iris.pb").
     Evaluate("evaluate something ...", func(in interface{}, data proto.Message) error {
+        // Classification ...
+        // Regression ...
+        // More ...
+        // Save metrics for validation
         return nil
     }).
     Validate("validate something ...", func(in interface{}, data proto.Message) error {
+        // Use the metrics ...
+        // Print statistics ...
+        // Plot diagrams ...
 	return nil
+    })
+    // Handle errors - If a certain step has failed, the next steps are ignored.
+    if err := p.Error(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
+Next you can use the **Load** method to speedup the process and decouple your project from the external resource:
+
+```go
+func main() {
+    p := new(pipeline.Pipeline)
+
+    p.Load("data/interim/iris.pb").
+    Transform(func(in proto.Message) (out proto.Message, err error) {
+        // Extract features ...
+        // Normalize ...
+        // Whatever ...
+        return nil, nil
+    }).
+    Save("data/processed/iris.pb").
+    Evaluate("evaluate something ...", func(in interface{}, data proto.Message) error {
+        // Classification ...
+        // Regression ...
+        // More ...
+        // Save metrics for validation
+        return nil
+    }).
+    Validate("validate something ...", func(in interface{}, data proto.Message) error {
+        // Use the metrics ...
+        // Print statistics ...
+        // Plot diagrams ...
+    return nil
     })
     // Handle errors - If a certain step has failed, the next steps are ignored.
     if err := p.Error(); err != nil {
