@@ -4,6 +4,8 @@
 
 Build your own data pipeline to gather, organize and transform data by using protobuf as an intermediate format.
 
+[Example sources](https://github.com/andygeiss/pipeline-example)
+
 ## Purpose
 
 According to [Daniel Whitenack](https://github.com/dwhitena), surveys have shown that 90% or more of a data scientist's time is spent collecting, organizing and cleansing data.
