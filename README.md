@@ -40,19 +40,21 @@ manually or use the following command:
 func main() {
     p := new(pipeline.Pipeline)
 
-	p.Gather("https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data", "data/external/iris.csv").
+    p.Gather("https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data", "data/external/iris.csv").
     Organize("data/external/iris.csv", func(records [][]string) (out proto.Message, err error) {
         return nil, nil
-    }).Save("data/interim/iris.pb").
+    }).
+    Save("data/interim/iris.pb").
     Transform(func(in proto.Message) (out proto.Message, err error) {
         return nil, nil
-    }).Save("data/processed/iris.pb").
+    }).
+    Save("data/processed/iris.pb").
     Evaluate("evaluate something ...", func(in interface{}, data proto.Message) error {
         return nil
     }).
     Validate("validate something ...", func(in interface{}, data proto.Message) error {
-		return nil
-	})
+	return nil
+    })
     // Handle errors - If a certain step has failed, the next steps are ignored.
     if err := p.Error(); err != nil {
         log.Fatal(err)
